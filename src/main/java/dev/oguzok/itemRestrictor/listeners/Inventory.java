@@ -37,8 +37,7 @@ public class Inventory implements Listener {
         String message = ItemUtil.getMessage(currentItem);
 
         if (currentAmount >= maxAmount) {
-            player.setCanPickupItems(false);
-            //e.setCancelled(true);
+            e.setCancelled(true);
 
             ItemRestrictor.delayedMessage(player, ColorUtil.toHex(message).replace("%amount%", String.valueOf(maxAmount)));
             return;

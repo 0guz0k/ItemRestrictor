@@ -2,7 +2,6 @@ package dev.oguzok.itemRestrictor.utilities;
 
 import dev.oguzok.itemRestrictor.utilities.serializer.ColorUtil;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ParseUtil {

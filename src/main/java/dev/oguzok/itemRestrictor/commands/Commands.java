@@ -2,7 +2,6 @@ package dev.oguzok.itemRestrictor.commands;
 
 import dev.oguzok.itemRestrictor.ItemRestrictor;
 import dev.oguzok.itemRestrictor.configuration.LoadValues;
-import dev.oguzok.itemRestrictor.utilities.ParseUtil;
 import dev.oguzok.itemRestrictor.utilities.PermissionUtil;
 import dev.oguzok.itemRestrictor.utilities.serializer.ColorUtil;
 

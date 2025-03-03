@@ -1,0 +1,10 @@
+dev\oguzok\itemRestrictor\configuration\ValuesData.class
+dev\oguzok\itemRestrictor\utilities\serializer\ColorUtil.class
+dev\oguzok\itemRestrictor\commands\Commands.class
+dev\oguzok\itemRestrictor\listeners\Inventory.class
+dev\oguzok\itemRestrictor\ItemRestrictor.class
+dev\oguzok\itemRestrictor\utilities\item\ItemUtil.class
+dev\oguzok\itemRestrictor\configuration\LoadValues.class
+dev\oguzok\itemRestrictor\utilities\ParseUtil.class
+dev\oguzok\itemRestrictor\utilities\PermissionUtil.class
+dev\oguzok\itemRestrictor\ItemRestrictor$1.class

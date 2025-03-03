@@ -57,13 +57,9 @@ public class LoadValues {
                 String message = config.getString("restricts." + section + ".message");
                 String storageMessage = config.getString("restricts." + section + ".storage_message");
 
-                sectionCount++;
-
                 valuesData.put(section, new ValuesData(materials, enchantments, potionTypes, customModelData, maxAmount, message, storageMessage));
             }
         }
-
-        Bukkit.broadcastMessage(ColorUtil.toHex("&e[DEBUG] &fЗагружено &6" + sectionCount + " &fсекций предметов."));
 
         checkInvInterval = config.getLong("check_inventory_interval");
         disabledWorlds = config.getStringList("disabled_worlds");

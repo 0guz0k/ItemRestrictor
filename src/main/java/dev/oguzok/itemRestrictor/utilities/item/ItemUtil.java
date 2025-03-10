@@ -116,7 +116,6 @@ public class ItemUtil {
                 return potionTypes.contains(potionMeta.getBasePotionType().name());
             }
         }
-
         return true;
     }
 

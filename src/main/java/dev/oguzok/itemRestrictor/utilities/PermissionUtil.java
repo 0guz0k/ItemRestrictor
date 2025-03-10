@@ -1,7 +1,6 @@
 package dev.oguzok.itemRestrictor.utilities;
 
 import org.bukkit.entity.Player;
-
 public class PermissionUtil {
 
     public static boolean hasBypassPermission(Player player) {

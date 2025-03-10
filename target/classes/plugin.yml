@@ -1,9 +1,0 @@
-name: ItemRestrictor
-version: '0.1'
-main: dev.oguzok.itemRestrictor.ItemRestrictor
-api-version: '1.21'
-commands:
-  itemrestrictor:
-    aliases:
-      - ir
-      - irestrictor

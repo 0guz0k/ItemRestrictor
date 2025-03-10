@@ -4,7 +4,6 @@ import dev.oguzok.itemRestrictor.ItemRestrictor;
 import dev.oguzok.itemRestrictor.configuration.LoadValues;
 import dev.oguzok.itemRestrictor.utilities.PermissionUtil;
 import dev.oguzok.itemRestrictor.utilities.serializer.ColorUtil;
-
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;

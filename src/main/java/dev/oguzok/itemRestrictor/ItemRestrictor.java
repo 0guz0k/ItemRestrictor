@@ -36,6 +36,7 @@ public final class ItemRestrictor extends JavaPlugin {
 
     public static void startCheck() {
         long interval = LoadValues.getInstance().getCheckInvInterval();
+
         new BukkitRunnable() {
             @Override
             public void run() {

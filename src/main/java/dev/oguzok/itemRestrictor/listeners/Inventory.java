@@ -2,11 +2,9 @@ package dev.oguzok.itemRestrictor.listeners;
 
 import dev.oguzok.itemRestrictor.ItemRestrictor;
 import dev.oguzok.itemRestrictor.configuration.LoadValues;
-import dev.oguzok.itemRestrictor.utilities.ParseUtil;
 import dev.oguzok.itemRestrictor.utilities.PermissionUtil;
 import dev.oguzok.itemRestrictor.utilities.item.ItemUtil;
 import dev.oguzok.itemRestrictor.utilities.serializer.ColorUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -16,8 +14,6 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-
-import java.util.List;
 
 public class Inventory implements Listener {
 
@@ -41,7 +37,6 @@ public class Inventory implements Listener {
 
         if (currentAmount >= maxAmount) {
             e.setCancelled(true);
-
             ItemRestrictor.delayedMessage(player, ColorUtil.toHex(message).replace("%amount%", String.valueOf(maxAmount)));
             return;
         }
@@ -111,12 +106,10 @@ public class Inventory implements Listener {
                     ItemRestrictor.delayedMessage(player, ColorUtil.toHex(message).replace("%amount%", String.valueOf(maxAmount)));
                 } else {
                     e.setCancelled(true);
-
                     ItemRestrictor.delayedMessage(player, ColorUtil.toHex(message).replace("%amount%", String.valueOf(maxAmount)));
                 }
             } else {
                 e.setCancelled(true);
-
                 ItemRestrictor.delayedMessage(player, ColorUtil.toHex(message).replace("%amount%", String.valueOf(maxAmount)));
             }
         }
@@ -128,9 +121,7 @@ public class Inventory implements Listener {
         if (PermissionUtil.hasBypassPermission(player) || player.getGameMode() == GameMode.CREATIVE) return;
         if (LoadValues.getInstance().getDisabledWorlds().contains(player.getWorld().getName())) return;
         if (LoadValues.getInstance().getCheckMode() == 1) {
-            Bukkit.getScheduler().runTaskLater(ItemRestrictor.getInstance(), () -> {
-                ItemUtil.checkInventory((Player) e.getPlayer());
-            }, 1L);
+            Bukkit.getScheduler().runTaskLater(ItemRestrictor.getInstance(), () -> ItemUtil.checkInventory((Player) e.getPlayer()), 1L);
         }
     }
 }

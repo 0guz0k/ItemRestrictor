@@ -4,7 +4,9 @@ import dev.oguzok.itemRestrictor.ItemRestrictor;
 import dev.oguzok.itemRestrictor.utilities.serializer.ColorUtil;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +18,7 @@ public class LoadValues {
     private final Map<String, ValuesData> valuesData = new HashMap<>();
 
     private Boolean status;
+    private Integer checkMode;
     private Long checkInvInterval;
     private List<String> disabledWorlds;
     private Long messageInterval;
@@ -36,9 +39,10 @@ public class LoadValues {
         if (status) {
             for (String section : config.getConfigurationSection("restricts").getKeys(false)) {
 
-                List<String> materials = config.getStringList("restricts." + section + ".material")
+                List<Material> materials = config.getStringList("restricts." + section + ".material")
                         .stream()
                         .map(String::toUpperCase)
+                        .map(Material::getMaterial)
                         .toList();
 
                 List<String> enchantments = config.getStringList("restricts." + section + ".enchantments")
@@ -60,7 +64,8 @@ public class LoadValues {
             }
         }
 
-        checkInvInterval = config.getLong("check_inventory_interval");
+        checkMode = config.getInt("check_mode");
+        if (checkMode == 2) checkInvInterval = config.getLong("check_inventory_interval");
         disabledWorlds = config.getStringList("disabled_worlds");
 
         messageInterval = config.getLong("message_interval");
@@ -75,6 +80,10 @@ public class LoadValues {
 
     public Boolean getStatus() {
         return status;
+    }
+
+    public Integer getCheckMode() {
+        return checkMode;
     }
 
     public Long getCheckInvInterval() {

@@ -28,22 +28,20 @@ public final class ItemRestrictor extends JavaPlugin {
         getCommand("itemrestrictor").setExecutor(new Commands());
 
         getServer().getPluginManager().registerEvents(new Inventory(), this);
-
-        startCheck();
     }
 
     public static ItemRestrictor getInstance() {
         return instance;
     }
 
-    public void startCheck() {
+    public static void startCheck() {
         long interval = LoadValues.getInstance().getCheckInvInterval();
-
         new BukkitRunnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) ItemUtil.checkInventory(player);
             }
-        }.runTaskTimer(this, 0, interval);
+        }.runTaskTimer(ItemRestrictor.getInstance(), 0, interval);
     }
 
     public static void delayedMessage(Player player, String message) {

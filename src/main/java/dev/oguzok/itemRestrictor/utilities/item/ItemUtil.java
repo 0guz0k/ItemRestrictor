@@ -78,10 +78,10 @@ public class ItemUtil {
         return null;
     }
 
-    public static boolean containsMaterial(ItemStack currentItem, List<String> materials) {
+    public static boolean containsMaterial(ItemStack currentItem, List<Material> materials) {
         if (materials == null || materials.isEmpty()) return false;
 
-        return materials.contains(currentItem.getType().name());
+        return materials.contains(currentItem.getType());
     }
 
     public static boolean containsEnchantments(ItemStack currentItem, List<String> enchantments) {

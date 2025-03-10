@@ -7,6 +7,7 @@ import dev.oguzok.itemRestrictor.utilities.PermissionUtil;
 import dev.oguzok.itemRestrictor.utilities.item.ItemUtil;
 import dev.oguzok.itemRestrictor.utilities.serializer.ColorUtil;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +16,8 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerAttemptPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+
+import java.util.List;
 
 public class Inventory implements Listener {
 
@@ -92,9 +95,7 @@ public class Inventory implements Listener {
             } else if (e.getAction() == InventoryAction.HOTBAR_SWAP || e.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD || e.getClick().isKeyboardClick()) {
                 e.setCancelled(true);
 
-                ParseUtil.parseMessage(player, ColorUtil.toHex(
-                        message.replace("%amount%", String.valueOf(maxAmount))
-                ));
+                ItemRestrictor.delayedMessage(player, ColorUtil.toHex(message).replace("%amount%", String.valueOf(maxAmount)));
             } else if (e.isShiftClick()) {
                 e.setCancelled(true);
 
@@ -121,29 +122,15 @@ public class Inventory implements Listener {
         }
     }
 
-    /*@EventHandler
-    public void onInventoryDrag(InventoryDragEvent e) {
-        ItemStack cursorItem = e.getCursor();
-
-        if (cursorItem == null || cursorItem.getType().isAir()) return;
-
-        Integer maxAmount = ItemUtil.getMaxAmount(cursorItem);
-        if (maxAmount == null) return;
-
-        List<String> storages = ItemUtil.getStorageTypes(cursorItem);
-        if (storages.contains(e.getInventory().getType().name())) return;
-
-        String storageMessage = ItemUtil.getStorageMessage(cursorItem);
-
-        for (int slot : e.getRawSlots()) {
-            if (slot >= 0 && slot < e.getInventory().getSize()) {
-                e.setCancelled(true);
-
-                if (storageMessage == null || storageMessage.isEmpty()) {
-                    ItemRestrictor.delayedMessage((Player) e.getWhoClicked(), ColorUtil.toHex(storageMessage));
-                }
-                return;
-            }
+    @EventHandler public void on(InventoryCloseEvent e) {
+        if (!LoadValues.getInstance().getStatus()) return;
+        final Player player = (Player) e.getPlayer();
+        if (PermissionUtil.hasBypassPermission(player) || player.getGameMode() == GameMode.CREATIVE) return;
+        if (LoadValues.getInstance().getDisabledWorlds().contains(player.getWorld().getName())) return;
+        if (LoadValues.getInstance().getCheckMode() == 1) {
+            Bukkit.getScheduler().runTaskLater(ItemRestrictor.getInstance(), () -> {
+                ItemUtil.checkInventory((Player) e.getPlayer());
+            }, 1L);
         }
-    }*/
+    }
 }

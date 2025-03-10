@@ -30,6 +30,7 @@ public class Commands implements CommandExecutor, TabCompleter {
             if (args[0].equalsIgnoreCase("reload")) {
                 ItemRestrictor.getInstance().reloadConfig();
                 LoadValues.getInstance().loadConfig(ItemRestrictor.getInstance());
+                if (LoadValues.getInstance().getCheckMode() == 2) ItemRestrictor.startCheck();
                 sender.sendMessage(ColorUtil.toHex(
                         LoadValues.getInstance().getMessageReload()
                 ));
